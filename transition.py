@@ -12,8 +12,7 @@ class Board(object):
         Position is indicated by a tuple of the form (row, column).
         NB: It works only when the `O` player moves UP and `X` moves
         down'''
-        # check board bound
-        # check whether the same kind or the other (opponent or own)
+
         try:
             (x,y) = src
             (a,b) = dst
