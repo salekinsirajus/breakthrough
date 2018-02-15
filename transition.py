@@ -19,30 +19,27 @@ class Board(object):
             (a,b) = dst
             srcSym = self.get_sym(src)
             dstSym = self.get_sym(dst)
-            print ("From get symbol method ", dstSym, srcSym)
+            
+            # CP1(CheckPoint1): Invalid Index, negative and outside of list
             if None in [srcSym, dstSym]:
                 print("Out of bound error, both negative and larger than size")
                 return False
             print ("symbols from is_valid function ", dstSym, srcSym, src, dst)
-            # Negative indices DOES NOT raise indexError in Python
 
-            # source and destiation cannot be the same location
-            # If the direction is horizontal, return False
-            # Same applies for src = dst. This takes care of both
+            # CP2: source /= destination, same row movement not permitted either
             if x == a:
                 print("Error: src=dst")
                 return False
-                
-            # Determine the move direction
-            # If src is `O`, the valid dest direction is upwards, 
+            
+            # CP3: Wrong Move Direction    
+            # For player `O`, the valid dest direction is upwards
             if srcSym == self.playerO:
                 if x == (a + 1):
                     pass
                 else:
                     print("The direction is not upward")
                     return False
-            # for `x`
-            # the valid dest direction is downwards
+            # For `X` the valid dest direction is downwards
             if srcSym == self.playerX:
                 if x == (a - 1):
                     pass
@@ -50,13 +47,15 @@ class Board(object):
                     print("The direction is not downward")
                     return False
 
+            # CP4: Movement of more than one unit
             # The jump cannot be more than one unit forward or diagonal
             col_diff = abs(y - b)
             print ("col diff: ", col_diff)
             if col_diff > 1 or col_diff < 0:
                 return False
- 
-            # Have the destination occupied by player of the same team
+            
+            # CP5: Occupied by the same player
+            # A move can be made when the dst is either `.` or enemy
             if dstSym == srcSym:
                 print("")
                 return False
@@ -70,6 +69,9 @@ class Board(object):
     def get_sym(self, position):
         try:
             (x, y) = position
+     
+            # Negative indices DOES NOT raise indexError in Python
+            # Board contains only positive (x,y) values.
             for i in position:
                 if i < 0:
                     return None
@@ -138,7 +140,7 @@ class Board(object):
             print("Invalid position, TypeError raised.")
             return []
 
-                         
+'''                         
 brd = [['x','x'],
         ['.','.', '.'],
         ['o','o'],
@@ -160,3 +162,4 @@ for i, r in enumerate(brd):
         print("Player: ", b.get_sym((i, j)))
         print("Direction: ", b.get_direction((i,j)))
         print("Possible moves: ", b.get_moves((i,j)))
+'''
