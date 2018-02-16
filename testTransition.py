@@ -10,7 +10,10 @@ class TestBoardMethods(unittest.TestCase):
                             ]
         self.threeX3Board = Board(self.threeX3List)
     
-    # @unittest.skip("False value already tested")
+    def tearDown(self):
+        pass
+
+    #@unittest.skip("False value already tested")
     def test_is_valid_false(self):
         pairs_false = [[(0,0),(0,0)], # False, src = dst
                         [(0,0),(0,2)],   # False, two units, same row
@@ -26,6 +29,7 @@ class TestBoardMethods(unittest.TestCase):
             with self.subTest(pair=pair):
                 self.assertIs(self.threeX3Board.is_valid(pair[0],pair[1]), False)
 
+    #@unittest.skip("False value already tested")
     def test_is_valid_true(self):
         pairs_true = [[(0,0),(1,0)], # True, forward
                         [(0,0),(1,1)],   # True, diagonal left
@@ -41,6 +45,7 @@ class TestBoardMethods(unittest.TestCase):
             with self.subTest(pair=pair):
                 self.assertTrue(self.threeX3Board.is_valid(pair[0],pair[1]))
 
+    #@unittest.skip("False value already tested")
     def test_get_moves_returns_empty(self):
         # For point where the returned list will be empty
         dots = [(1,0),     # [], no player, column-0
@@ -52,6 +57,7 @@ class TestBoardMethods(unittest.TestCase):
             with self.subTest(each=each):
                 self.assertEqual(self.threeX3Board.get_moves(each), [])
 
+    #@unittest.skip("False value already tested")
     def test_get_moves_for_playerO(self):
         # For point where the returned list will be empty
         dots = [(2,0),     # [], playerO, column-0
@@ -62,6 +68,7 @@ class TestBoardMethods(unittest.TestCase):
         self.assertEqual(self.threeX3Board.get_moves(dots[1]), [(1,0),(1,1),(1,2)])
         self.assertEqual(self.threeX3Board.get_moves(dots[2]), [(1,1),(1,2)])
 
+    #@unittest.skip("False value already tested")
     def test_get_moves_for_playerX(self):
         # For point where the returned list will be empty
         dots = [(0,0),     # [], playerX, column-0
@@ -72,5 +79,29 @@ class TestBoardMethods(unittest.TestCase):
         self.assertEqual(self.threeX3Board.get_moves(dots[1]), [(1,0),(1,1),(1,2)])
         self.assertEqual(self.threeX3Board.get_moves(dots[2]), [(1,1),(1,2)])
             
+
+    def test_move_forward(self):
+        old_new_pairs = [[(0,0),(1,0)],
+                         [(0,1),(1,1)],
+                         [(0,2),(1,2)],
+                         [(2,0),(1,0)],
+                         [(2,1),(1,1)],
+                         [(2,2),(1,2)]
+                        ]
+
+        for pair in old_new_pairs:
+            with self.subTest(pair = pair):
+                player = self.threeX3Board.get_sym(pair[0])
+                self.threeX3Board.move(pair[0], 'F')
+                self.assertIs(self.threeX3Board.get_sym((pair[0])), '.')    # emptied
+                self.assertIs(self.threeX3Board.get_sym((pair[1])), player)    # newly occupied
+
+    def test_move_dright_playerO(self):
+        pass
+
+    def test_move_dleft_for_playerO(self):
+        pass
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -6,6 +6,7 @@ class Board(object):
         self.board = list2d
         self.playerO = 'O'
         self.playerX = 'X'
+
     
     def is_valid(self, src, dst):
         '''Checking to see if it's possible to move from src to dst.
@@ -65,17 +66,6 @@ class Board(object):
             print ("out of the board {0} {1}".format(dst, e))
             return False
 
-
-    def displayState(self, input_list):
-        '''Prints out the state passed to this function on the terminal.'''
-        # check if it's a 2-d list
-        for row in input_list:
-            for column in row:
-                print(column, end=' ')
-            print("\n")
-        print("Done")
-
-
     
     def get_sym(self, position):
         '''Returns the symbol/character at position passed. 
@@ -99,6 +89,7 @@ class Board(object):
                 return None
         except IndexError:
             return None
+
 
     def get_direction(self, posit):
         try:
@@ -154,43 +145,6 @@ class Board(object):
             print("Invalid position, TypeError raised.")
             return []
 
-
-    def terminal_state(self, input_list):
-        player1 = False
-        player2 = False
-
-        p1list = []
-        p2list = []
-
-
-        for row in input_list:
-            for element in row:
-        #First case, when one of the players pieces is all out
-                if element is self.playerX:
-                    p1list.append(element)
-                if element is self.playerO:
-                    p2list.append(element)
-
-        #Second case, when one of the pieces move to the last row
-        for element in input_list[-1]:
-            if element == "X":
-                player1 = True
-        for element in input_list[0]:
-            if element == "O":
-                player2 = True
-
-        #Print the result for both cases 
-
-        if player1 is True:
-            print("Game Over. Player 1 won")
-        if player2 is True:
-            print("Game Over. Player 2 won")
-
-
-        if len(p1list) == 0:
-            print("Game Over. Player 2 won")
-        if len(p2list) == 0:
-            print("Game Over. Player 1 won")
 
     def move(self, posit, turn):
         '''Move to the direction =['R','L','F'] asked to from position passed'''
@@ -254,4 +208,3 @@ class Board(object):
             print(e)
             return False
                
->>>>>>> Stashed changes
