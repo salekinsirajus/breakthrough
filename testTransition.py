@@ -10,9 +10,6 @@ class TestBoardMethods(unittest.TestCase):
                             ]
         self.threeX3Board = Board(self.threeX3List)
     
-    def tearDown(self):
-        pass
-
     # @unittest.skip("False value already tested")
     def test_is_valid_false(self):
         pairs_false = [[(0,0),(0,0)], # False, src = dst
@@ -42,7 +39,7 @@ class TestBoardMethods(unittest.TestCase):
                         ]
         for pair in pairs_true:
             with self.subTest(pair=pair):
-                self.assertIs(self.threeX3Board.is_valid(pair[0],pair[1]), True)
+                self.assertTrue(self.threeX3Board.is_valid(pair[0],pair[1]))
 
     def test_get_moves_returns_empty(self):
         # For point where the returned list will be empty
@@ -75,16 +72,5 @@ class TestBoardMethods(unittest.TestCase):
         self.assertEqual(self.threeX3Board.get_moves(dots[1]), [(1,0),(1,1),(1,2)])
         self.assertEqual(self.threeX3Board.get_moves(dots[2]), [(1,1),(1,2)])
             
-
-    def test_move_forward_for_playerO(self):
-        pass
-
-    def test_move_dright_playerO(self):
-        pass
-
-    def test_move_dleft_for_playerO(self):
-        pass
-
-
 if __name__ == '__main__':
     unittest.main()

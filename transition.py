@@ -6,7 +6,6 @@ class Board(object):
         self.board = list2d
         self.playerO = 'O'
         self.playerX = 'X'
-
     
     def is_valid(self, src, dst):
         '''Checking to see if it's possible to move from src to dst.
@@ -65,7 +64,6 @@ class Board(object):
         except IndexError as e:
             print ("out of the board {0} {1}".format(dst, e))
             return False
-
     
     def get_sym(self, position):
         try:
@@ -88,7 +86,6 @@ class Board(object):
         except IndexError:
             return None
 
-
     def get_direction(self, posit):
         try:
             sym = self.get_sym(posit)
@@ -104,7 +101,6 @@ class Board(object):
         # methods
         except Exception:
             return None
-
 
     def get_moves(self, posit):
         try:
@@ -144,14 +140,72 @@ class Board(object):
             return []
 
 
-    def move_forward(self, posit):
-        # identify the destination
-        # validate move
-        # return success or failure
-        pass
-    
-    def move_dright(self, posit):
-        pass
+"""
+This is the move generator given an intial position, 
+destination and whose turn it is, it will make a single
+move from source to destination. 
 
-    def move_dleft(self, posit):
-        pass    
+"""                     
+
+def single_move (src_position, dest_position, turn):
+    x = dest_position[0]
+    y = dest_position[1]
+
+    src_x = src_position[0]
+    src_y = src_position[1]
+
+    #Check whose turn it is
+    if turn == "X":  
+        if x == src_x+1 and y == src_y-1:        #direction is leftbottom
+            return src_position[0] + 1, src_position[1] -1
+
+
+        
+
+
+
+        
+
+
+
+
+
+source = (1,1)
+destination  = (2,0)
+turn = "X"
+
+result = single_move(source, destination, turn)
+print(result)
+
+
+"""
+brd = [['x','x', "x"],
+        ['.','.', '.'],
+        ['o','o', "o"],
+        ]
+
+b = Board(brd)
+x = (0,0)
+
+y = b.get_moves(x)
+print(y)
+#print (b.is_valid((0,1), (1,1)))
+
+
+
+for i, r in enumerate(brd):
+    for j, c in enumerate(r):
+        
+        print("Testing is_valid method : ", b.is_valid((i,j),(i-1,j-1)), i-1, j-1)
+        print("Testing is_valid method : ", b.is_valid((i,j),(i-1,j)), i-1, j)
+        print("Testing is_valid method : ", b.is_valid((i,j),(i-1,j+1)), i-1,j+1)
+        print("Testing is_valid method : ", b.is_valid((i,j),(i+1,j-1)), i+1,j-1)
+        print("Testing is_valid method : ", b.is_valid((i,j),(i+1,j)), i+1, j)
+        print("Testing is_valid method : ", b.is_valid((i,j),(i+1,j+1)),i+1,j+1)
+        
+        print("Element in list ", i, j)
+        print("Player: ", b.get_sym((i, j)))
+        print("Direction: ", b.get_direction((i,j)))
+        print("Possible moves: ", b.get_moves((i,j)))
+
+"""
