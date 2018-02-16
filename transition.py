@@ -6,6 +6,7 @@ class Board(object):
         self.board = list2d
         self.playerO = 'O'
         self.playerX = 'X'
+
     
     def is_valid(self, src, dst):
         '''Checking to see if it's possible to move from src to dst.
@@ -64,6 +65,7 @@ class Board(object):
         except IndexError as e:
             print ("out of the board {0} {1}".format(dst, e))
             return False
+
     
     def get_sym(self, position):
         try:
@@ -86,6 +88,7 @@ class Board(object):
         except IndexError:
             return None
 
+
     def get_direction(self, posit):
         try:
             sym = self.get_sym(posit)
@@ -101,6 +104,7 @@ class Board(object):
         # methods
         except Exception:
             return None
+
 
     def get_moves(self, posit):
         try:
@@ -139,26 +143,15 @@ class Board(object):
             print("Invalid position, TypeError raised.")
             return []
 
-'''                         
-brd = [['x','x'],
-        ['.','.', '.'],
-        ['o','o'],
-        ]
 
-b = Board(brd)
-print (b.is_valid((0,1), (1,1)))
-for i, r in enumerate(brd):
-    for j, c in enumerate(r):
-        
-        print("Testing is_valid method : ", b.is_valid((i,j),(i-1,j-1)), i-1, j-1)
-        print("Testing is_valid method : ", b.is_valid((i,j),(i-1,j)), i-1, j)
-        print("Testing is_valid method : ", b.is_valid((i,j),(i-1,j+1)), i-1,j+1)
-        print("Testing is_valid method : ", b.is_valid((i,j),(i+1,j-1)), i+1,j-1)
-        print("Testing is_valid method : ", b.is_valid((i,j),(i+1,j)), i+1, j)
-        print("Testing is_valid method : ", b.is_valid((i,j),(i+1,j+1)),i+1,j+1)
-        
-        print("Element in list ", i, j)
-        print("Player: ", b.get_sym((i, j)))
-        print("Direction: ", b.get_direction((i,j)))
-        print("Possible moves: ", b.get_moves((i,j)))
-'''
+    def move_forward(self, posit):
+        # identify the destination
+        # validate move
+        # return success or failure
+        pass
+    
+    def move_dright(self, posit):
+        pass
+
+    def move_dleft(self, posit):
+        pass    
