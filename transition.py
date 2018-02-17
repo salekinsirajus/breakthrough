@@ -66,10 +66,9 @@ class Board(object):
             return False
 
 
-    def displayState(self, input_list):
+    def display_state(self):
         '''Prints out the state passed to this function on the terminal.'''
-        # check if it's a 2-d list
-        for row in input_list:
+        for row in self.board:
             for column in row:
                 print(column, end=' ')
             print("\n")
@@ -154,8 +153,10 @@ class Board(object):
             print("Invalid position, TypeError raised.")
             return []
 
-
-    def terminal_state(self, input_list):
+    
+    def terminal_state(self):
+        '''Check if current state is a terminal one.'''
+        # Need to change the variable names to make things more consistent
         player1 = False
         player2 = False
 
@@ -163,7 +164,7 @@ class Board(object):
         p2list = []
 
 
-        for row in input_list:
+        for row in self.board:
             for element in row:
         #First case, when one of the players pieces is all out
                 if element is self.playerX:
@@ -172,10 +173,10 @@ class Board(object):
                     p2list.append(element)
 
         #Second case, when one of the pieces move to the last row
-        for element in input_list[-1]:
+        for element in self.board[-1]:
             if element == "X":
                 player1 = True
-        for element in input_list[0]:
+        for element in self.board[0]:
             if element == "O":
                 player2 = True
 
@@ -191,6 +192,7 @@ class Board(object):
             print("Game Over. Player 2 won")
         if len(p2list) == 0:
             print("Game Over. Player 1 won")
+    
 
     def move(self, posit, turn):
         '''Move to the direction =['R','L','F'] asked to from position passed'''
@@ -253,5 +255,4 @@ class Board(object):
             # Anything goes wrong
             print(e)
             return False
-               
->>>>>>> Stashed changes
+            
