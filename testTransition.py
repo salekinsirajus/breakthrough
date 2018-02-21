@@ -8,7 +8,7 @@ class TestBoardMethods(unittest.TestCase):
                             ['.','.','.'],
                             ['o','o', 'o'],
                             ]
-        self.threeX3Board = Board(self.threeX3List)
+        self.threeX3Board = Board(self.threeX3List, 'O')
     
     def tearDown(self):
         pass

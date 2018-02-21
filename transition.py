@@ -2,11 +2,12 @@
 
 class Board(object):
     
-    def __init__(self, list2d):
+    def __init__(self, list2d, cursor_at):
         self.board = list2d
         self.playerO = 'O'
         self.playerX = 'X'
-    
+        self.cursor_at = cursor_at
+
     def is_valid(self, src, dst):
         '''Checking to see if it's possible to move from src to dst.
         Position is indicated by a tuple of the form (row, column).
@@ -193,11 +194,24 @@ class Board(object):
         if len(p2list) == 0:
             print("Game Over. Player 1 won")
     
+    def switch_turn(self):
+        if self.cursor_at == self.playerO:
+            self.cursor_at = self.playerX
+        if self.cursor_at == self.playerX:
+            self.cursor_at = self.playerO
+
+        return self.cursor_at
+            
 
     def move(self, posit, turn):
         '''Move to the direction =['R','L','F'] asked to from position passed'''
         # print("Come inside the function move") 
         try:
+            # Check if it's current players turn
+            if self.cursor_at != self.get_sym(posit):
+                print("Not your turn yet. Illegal try.")
+                return False
+
             # print("Come inside the try block")
             # Identify the destination
             (x, y) = posit
@@ -249,6 +263,8 @@ class Board(object):
             self.board[a][b] = self.board[x][y]
             self.board[x][y] = '.'
             
+            # Flip the turn to the other player
+            self.switch_turn()
             return True
 
         except Exception as e:
