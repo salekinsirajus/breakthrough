@@ -1,4 +1,5 @@
 # Define the transition function
+# Modified from 'turn functionality commit'
 
 class Board(object):
     
@@ -9,10 +10,10 @@ class Board(object):
         self.cursor_at = cursor_at
 
     def is_valid(self, src, dst):
-        '''Checking to see if it's possible to move from src to dst.
+        """Checking to see if it's possible to move from src to dst.
         Position is indicated by a tuple of the form (row, column).
         NB: It works only when the `O` player moves UP and `X` moves
-        down'''
+        down"""
 
         try:
             (x,y) = src
@@ -68,7 +69,7 @@ class Board(object):
 
 
     def display_state(self):
-        '''Prints out the state passed to this function on the terminal.'''
+        """Prints out the state passed to this function on the terminal."""
         for row in self.board:
             for column in row:
                 print(column, end=' ')
@@ -78,8 +79,8 @@ class Board(object):
 
     
     def get_sym(self, position):
-        '''Returns the symbol/character at position passed. 
-           Returns None if it's neither `O` nor `X`'''
+        """Returns the symbol/character at position passed. 
+           Returns None if it's neither `O` nor `X`"""
         try:
             (x, y) = position
      
@@ -156,7 +157,7 @@ class Board(object):
 
     
     def terminal_state(self):
-        '''Check if current state is a terminal one.'''
+        """Check if current state is a terminal one."""
         # Need to change the variable names to make things more consistent
         player1 = False
         player2 = False
@@ -204,7 +205,7 @@ class Board(object):
             
 
     def move(self, posit, turn):
-        '''Move to the direction =['R','L','F'] asked to from position passed'''
+        """Move to the direction =['R','L','F'] asked to from position passed"""
         # print("Come inside the function move") 
         try:
             # Check if it's current players turn
