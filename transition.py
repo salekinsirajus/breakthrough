@@ -3,11 +3,18 @@
 
 class Board(object):
     
-    def __init__(self, list2d, cursor_at):
+    def __init__(self, list2d, cursor_at='O'):
+        """Initializes the board with whose turn. Default is `O`"""
         self.board = list2d
         self.playerO = 'O'
         self.playerX = 'X'
         self.cursor_at = cursor_at
+
+    def get_turn(self):
+        return self.cursor_at
+
+    def get_current_state(self):
+        return self.board
 
     def is_valid(self, src, dst):
         """Checking to see if it's possible to move from src to dst.
@@ -198,8 +205,10 @@ class Board(object):
     def switch_turn(self):
         if self.cursor_at == self.playerO:
             self.cursor_at = self.playerX
-        if self.cursor_at == self.playerX:
+        elif self.cursor_at == self.playerX:
             self.cursor_at = self.playerO
+        else:
+            raise Exception
 
         return self.cursor_at
             
@@ -265,7 +274,9 @@ class Board(object):
             self.board[x][y] = '.'
             
             # Flip the turn to the other player
+            print("{0} just played.".format(self.cursor_at))
             self.switch_turn()
+            print("Next is {0}'s turn.".format(self.cursor_at))
             return True
 
         except Exception as e:
