@@ -1,5 +1,7 @@
 # Define the transition function
 # Modified from 'turn functionality commit'
+import traceback
+import sys
 
 class Board(object):
     
@@ -83,7 +85,6 @@ class Board(object):
             print("\n")
         print("Done")
 
-
     
     def get_sym(self, position):
         """Returns the symbol/character at position passed. 
@@ -123,9 +124,77 @@ class Board(object):
         # methods
         except Exception:
             return None
+    def get_positions(self, player):
+        """Returns all the position occupied by a certain player"""
+        try:
+            if player not in [self.playerX, self.playerO]:
+                print("Incorrect marker passed for player's symbol.")
+                raise ValueError
+                traceback.print_stack(file=sys.stdout)
 
+            positions_found = []
+            for x, row in enumerate(self.board):
+                for y, column in enumerate(row):
+                    if column == player:
+                        positions_found.append((x,y))
+            
+            return positions_found
+
+        except Exception as e:
+            print(e)
+            traceback.print_stack(file=sys.stdout)
+
+    def all_moves(self, player):
+        """Returns a data structure full of possible moves by a player"""
+        
+        all_positions = self.get_positions(player)
+        movement_dict = {}
+        print(all_positions)
+        for position in all_positions:
+            # A single source
+            (x,y) = position
+            # Is this moving upwards or downwards
+            flow = self.get_direction(position)
+            # All the moves for this position in a list
+            moves_for_this_position = self.get_moves(position)
+            print(moves_for_this_position)
+            for i, move in enumerate(moves_for_this_position):
+                (x1, y1) = move
+                if flow == 'U':
+                    if y1 == y + 1:      # to the right
+                        # Replacing the destination with letter
+                        moves_for_this_position[i] = 'R'
+                    elif y1 == y - 1:      # to the left
+                        # Replacing the destination with letter
+                        moves_for_this_position[i] = 'L' 
+                    elif y1 == y:      # to forward
+                        # Replacing the destination with letter
+                        moves_for_this_position[i] = 'F'
+                    else:
+                        print("Sth wrong in the get_moves function")
+
+                elif flow == 'D':
+                    if y1 == y - 1:      # to the right
+                        # Replacing the destination with letter
+                        moves_for_this_position[i] = 'R'
+                    elif y1 == y + 1:      # to the left
+                        # Replacing the destination with letter
+                        moves_for_this_position[i] = 'L' 
+                    elif y1 == y:      # to forward
+                        # Replacing the destination with letter
+                        moves_for_this_position[i] = 'F'
+                    else:
+                        print("Sth wrong in the get_moves function")
+                else:
+                    print("Direction is neither up nor down. Invalid")
+
+            movement_dict[position] = moves_for_this_position
+
+        return movement_dict
 
     def get_moves(self, posit):
+        """Returns a list of valid moves for the position passed"""
+
         try:
             (x,y) = posit
             direction = self.get_direction(posit)
@@ -150,8 +219,7 @@ class Board(object):
                 # last elif and this else can be combined
                 pass
             # Filtering the valid moves
-            # valid_moves = list(filter(lambda x: self.is_valid(posit, x) == True, all_moves))
-            print("all_moves ", all_moves)
+            # print("all_moves ", all_moves)
             for move in all_moves:
                 if self.is_valid(posit, move) == True:
                     valid_moves.append(move)

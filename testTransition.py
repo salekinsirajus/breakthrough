@@ -5,11 +5,11 @@ from transition import Board
 class TestBoardMethods(unittest.TestCase):
 
     def setUp(self):
-        self.threeX3List = [['x','x','x'],
+        self.threeX3List = [['X','X','X'],
                             ['.','.','.'],
-                            ['o','o', 'o'],
+                            ['O','O', 'O'],
                             ]
-        self.threeX3Board = Board(self.threeX3List, 'O')
+        self.threeX3Board = Board(self.threeX3List, 'X')
     
     def tearDown(self):
         pass
@@ -59,7 +59,7 @@ class TestBoardMethods(unittest.TestCase):
                 self.assertEqual(self.threeX3Board.get_moves(each), [])
 
     #@unittest.skip("False value already tested")
-    def test_get_moves_for_playerO(self):
+    def test_get_moves_for_playerO_at_positions(self):
         # For point where the returned list will be empty
         dots = [(2,0),     # [], playerO, column-0
                 (2,1),     # [], playerO, middle
@@ -70,7 +70,7 @@ class TestBoardMethods(unittest.TestCase):
         self.assertEqual(self.threeX3Board.get_moves(dots[2]), [(1,1),(1,2)])
 
     #@unittest.skip("False value already tested")
-    def test_get_moves_for_playerX(self):
+    def test_get_moves_for_playerX_at_positions(self):
         # For point where the returned list will be empty
         dots = [(0,0),     # [], playerX, column-0
                 (0,1),     # [], playerX, middle
@@ -79,14 +79,20 @@ class TestBoardMethods(unittest.TestCase):
         self.assertEqual(self.threeX3Board.get_moves(dots[0]), [(1,0),(1,1)])
         self.assertEqual(self.threeX3Board.get_moves(dots[1]), [(1,0),(1,1),(1,2)])
         self.assertEqual(self.threeX3Board.get_moves(dots[2]), [(1,1),(1,2)])
-            
 
+    def test_all_moves_for_playerX(self):
+        """Supposed to return a dictionary with (x,y):['L','F','R']"""
+        self.assertCountEqual(self.threeX3Board.all_moves('X')[(0,0)], ['L', 'F'])        
+        self.assertCountEqual(self.threeX3Board.all_moves('X')[(0,1)], ['L','F','R'])
+        self.assertCountEqual(self.threeX3Board.all_moves('X')[(0,2)], ['F','R']) 
+        self.assertRaises(TypeError, self.threeX3Board.all_moves(), 'G')
+    
     def test_move_forward(self):
         old_new_pairs = [[(0,0),(1,0)],
-                         [(0,1),(1,1)],
-                         [(0,2),(1,2)],
                          [(2,0),(1,0)],
+                         [(0,1),(1,1)],
                          [(2,1),(1,1)],
+                         [(0,2),(1,2)],
                          [(2,2),(1,2)]
                         ]
 
