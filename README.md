@@ -1,6 +1,10 @@
 # Breakthrough
 Breakthrough game, playing with an AI agent
 
+# How To Play
+ 1. Make sure you have `python 3` installed.
+ 2. Run `python game.py` and follow the instructions.
+
 # Progress
 * Finished implementing `Board` Class methods
 
@@ -26,8 +30,7 @@ Breakthrough game, playing with an AI agent
     - [ ] `display_state()`
     - [ ] `terminal_state()`
 
-# ToDo
- 
+# ToDo 
     - [ ] Finish implementing the `Agent` class
     - [ ] Decide whether to implement a function or class for `Game`
     - [ ] Finish `minimax` tree

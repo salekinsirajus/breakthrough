@@ -91,6 +91,7 @@ def run_game(list2d, agent1, agent2):
         board.move(move_dest, direction)    
 
         # Does not work
+        print(board.terminal_state())
         if board.terminal_state() == True: 
             print("end game")
             break
