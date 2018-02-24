@@ -1,11 +1,6 @@
-# Defines an AI agent
 from transition import Board
 
-"""An agent receives a board state, i.e., a 2-d list as input at moment 
-And makes a decision based on that, and sends the next move back to the
-game controlling identity"""
-
-def agent_smith(game_state):
+def minimax(game_state, whose_turn, utility_func):
     # Examine the game states
     # Makes a decision based on that
     # returns a decision, i.e., a move with the help of from the minimax tree
@@ -17,32 +12,39 @@ def agent_smith(game_state):
     #    print("\n")
     
     # Minimax tree analyzes (dummied by human)
-    next_move = input("Enter the next move. Example: 11F")
+    next_move = input("Enter the next move. Example: 11F\n")
     x = int(next_move[0])
     y = int(next_move[1])
     direction = next_move[2]
 
     return (x,y),direction
 
-def utility(arg1, arg2):
-    result  = arg1 + arg2
-    print (result)
-    return result 
-
 class Agent(object):
-    def __init__(self, utility_func):
-        """An agent is initiated with a utility function associated with"""
+    """An agent receives a board state, i.e., a 2-d list as input at moment 
+    And makes a decision based on that, and sends the next move back to the
+    game controlling identity"""
+
+    def __init__(self, current_state, turn,  utility_func, symbol):
+        """Agent is initiated with a utility function associated with"""
         self.utility = utility_func
+        self.state = current_state
+        self.turn = turn
+        self.symbol = symbol
 
-    def run_utility(self, a,b):
-        r = self.utility(a,b)
-        print("Ran the passed function ",r)
+    def get_symbol(self):
+        return self.symbol
 
-    def make_move(self, current_state):
-        # analyze it
-        # return decision
-        pass
+    def update_state(self, new_state):
+        """Update the state with the one passed."""
+        try:
+            self.state = new_state
+            return True
+        except Exception as e:
+            print("Error updating Agent's state: {}".format(e))
+            return False
 
-a = Agent(utility)
-a.run_utility(5,6)
-
+    def next_move(self, current_state, turn):
+        # Initialize the minimax tree
+        decision = minimax(current_state, turn, self.utility)
+        
+        return decision

@@ -26,7 +26,8 @@ Breakthrough game, playing with an AI agent
     - [ ] `display_state()`
     - [ ] `terminal_state()`
 
-# ToDo 
+# ToDo
+ 
     - [ ] Finish implementing the `Agent` class
     - [ ] Decide whether to implement a function or class for `Game`
     - [ ] Finish `minimax` tree
@@ -34,4 +35,5 @@ Breakthrough game, playing with an AI agent
 
 # Unit Testing
 Simply run the `testTransition.py` file:
+
 ```python testTransition.py```

@@ -11,6 +11,10 @@ class Board(object):
         self.playerO = 'O'
         self.playerX = 'X'
         self.cursor_at = cursor_at
+        self.game_over = False        
+
+    def is_game_over(self):
+        return self.game_over
 
     def get_turn(self):
         return self.cursor_at
@@ -34,7 +38,7 @@ class Board(object):
             if None in [srcSym, dstSym]:
                 print("Out of bound error, both negative and larger than size")
                 return False
-            print ("symbols from is_valid function ", dstSym, srcSym, src, dst)
+            # print ("symbols from is_valid function ", dstSym, srcSym, src, dst)
 
             # CP2: source /= destination, same row movement not permitted either
             if x == a:
@@ -60,7 +64,6 @@ class Board(object):
             # CP4: Movement of more than one unit
             # The jump cannot be more than one unit forward or diagonal
             col_diff = abs(y - b)
-            print ("col diff: ", col_diff)
             if col_diff > 1 or col_diff < 0:
                 return False
             
@@ -83,7 +86,7 @@ class Board(object):
             for column in row:
                 print(column, end=' ')
             print("\n")
-        print("Done")
+        return
 
     
     def get_sym(self, position):
@@ -261,14 +264,17 @@ class Board(object):
 
         if player1 is True:
             print("Game Over. Player 1 won")
+            self.game_over = True
         if player2 is True:
             print("Game Over. Player 2 won")
-
+            self.game_over = True
 
         if len(p1list) == 0:
             print("Game Over. Player 2 won")
+            self.game_over = True
         if len(p2list) == 0:
             print("Game Over. Player 1 won")
+            self.game_over = True
     
     def switch_turn(self):
         if self.cursor_at == self.playerO:
@@ -287,7 +293,7 @@ class Board(object):
         try:
             # Check if it's current players turn
             if self.cursor_at != self.get_sym(posit):
-                print("Not your turn yet. Illegal try.")
+                print("Move not allowed. {0}'s turn now".format(self.cursor_at))
                 return False
 
             # print("Come inside the try block")
