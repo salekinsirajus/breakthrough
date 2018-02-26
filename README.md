@@ -37,7 +37,7 @@ Simply run the `testTransition.py` file:
 
 # ToDo 
 - [ ] Finish implementing the `Agent` class
-- [ ] Decide whether to implement a function or class for `Game`
-- [ ] Finish `minimax` tree
+- [x] Decide whether to implement a function or class for `Game`
+- [x] Finish `minimax` tree
 - [ ] Implement `conquerer` and 2 more utility functions
 

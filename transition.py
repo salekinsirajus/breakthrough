@@ -36,13 +36,12 @@ class Board(object):
             
             # CP1(CheckPoint1): Invalid Index, negative and outside of list
             if None in [srcSym, dstSym]:
-                print("Out of bound error, both negative and larger than size")
+                # print("Out of bound error, both negative and larger than size")
                 return False
-            # print ("symbols from is_valid function ", dstSym, srcSym, src, dst)
 
             # CP2: source /= destination, same row movement not permitted either
             if x == a:
-                print("Error: src=dst")
+                # print("Error: src=dst")
                 return False
             
             # CP3: Wrong Move Direction    
@@ -51,14 +50,14 @@ class Board(object):
                 if x == (a + 1):
                     pass
                 else:
-                    print("The direction is not upward")
+                    # print("The direction is not upward")
                     return False
             # For `X` the valid dest direction is downwards
             if srcSym == self.playerX:
                 if x == (a - 1):
                     pass
                 else:
-                    print("The direction is not downward")
+                    # print("The direction is not downward")
                     return False
 
             # CP4: Movement of more than one unit
@@ -76,7 +75,7 @@ class Board(object):
                 return True
 
         except IndexError as e:
-            print ("out of the board {0} {1}".format(dst, e))
+            # print ("out of the board {0} {1}".format(dst, e))
             return False
 
 
@@ -91,6 +90,7 @@ class Board(object):
         print("######################################################\n")
         return
    
+
     def get_sym(self, position):
         """Returns the symbol/character at position passed. 
            Returns None if it's neither `O` nor `X`"""
@@ -114,7 +114,9 @@ class Board(object):
         except IndexError:
             return None
 
+
     def get_direction(self, posit):
+        """To get upwards or downwards direction for a given position"""
         try:
             sym = self.get_sym(posit)
             direction = None
@@ -125,15 +127,16 @@ class Board(object):
             else:
                 direction = None
             return direction
-        # Need to look have a consistent exception behavior across
-        # methods
+        
         except Exception:
             return None
+
+
     def get_positions(self, player):
         """Returns all the position occupied by a certain player"""
         try:
             if player not in [self.playerX, self.playerO]:
-                print("Incorrect marker passed for player's symbol.")
+                # print("Incorrect marker passed for player's symbol.")
                 raise ValueError
                 traceback.print_stack(file=sys.stdout)
 
@@ -154,7 +157,7 @@ class Board(object):
         
         all_positions = self.get_positions(player)
         movement_dict = {}
-        print(all_positions)
+    
         for position in all_positions:
             # A single source
             (x,y) = position
@@ -162,7 +165,7 @@ class Board(object):
             flow = self.get_direction(position)
             # All the moves for this position in a list
             moves_for_this_position = self.get_moves(position)
-            print(moves_for_this_position)
+        
             for i, move in enumerate(moves_for_this_position):
                 (x1, y1) = move
                 if flow == 'U':
@@ -176,7 +179,7 @@ class Board(object):
                         # Replacing the destination with letter
                         moves_for_this_position[i] = 'F'
                     else:
-                        print("Sth wrong in the get_moves function")
+                        print("Somethig wrong in the get_moves function")
 
                 elif flow == 'D':
                     if y1 == y - 1:      # to the right
@@ -197,39 +200,35 @@ class Board(object):
 
         return movement_dict
 
+
     def get_moves(self, posit):
         """Returns a list of valid moves for the position passed"""
-
         try:
             (x,y) = posit
             direction = self.get_direction(posit)
             all_moves = []
             valid_moves = []
             if direction == 'U':
-                print("direction is up")
                 # direction upwards, (x-1, y-1): diagonal left,
                 # (x-1, y): forward, (x-1, y+1): diagonal right
                 all_moves = [(x-1, y-1), (x-1, y), (x-1,y+1)]
             elif direction == 'D':
-                print("direction downwards")       
                 # direction upwards, (x+1, y-1): diagonal left,
                 # (x+1, y): forward, (x+1, y+1): diagonal right
                 all_moves = [(x+1, y-1), (x+1, y), (x+1,y+1)]
-            # Think about ways to reuse this method without repeating.
-            # The following else is the crucial part
+            
             elif direction == '.':
-                print ("dot")
                 pass
             else:
                 # last elif and this else can be combined
                 pass
+
             # Filtering the valid moves
-            # print("all_moves ", all_moves)
             for move in all_moves:
                 if self.is_valid(posit, move) == True:
                     valid_moves.append(move)
                 else:
-                    print("is_valid returned False")
+                    pass
             return valid_moves
         except TypeError:
             print("Invalid position, TypeError raised.")
@@ -244,7 +243,6 @@ class Board(object):
 
         p1list = []
         p2list = []
-
 
         for row in self.board:
             for element in row:
@@ -263,7 +261,6 @@ class Board(object):
                 player2 = True
 
         #Print the result for both cases 
-
         if player1 is True:
             # print("First case, when one of the players pieces is all out")
             print("Game Over. Player X won")
@@ -289,6 +286,7 @@ class Board(object):
         # None of the winning conditions returned True
         return False   
  
+
     def switch_turn(self):
         if self.cursor_at == self.playerO:
             self.cursor_at = self.playerX
