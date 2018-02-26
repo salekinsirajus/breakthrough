@@ -69,7 +69,6 @@ class Board(object):
             # CP5: Occupied by the same player
             # A move can be made when the dst is either `.` or enemy
             if dstSym == srcSym:
-                print("")
                 return False
             else:
                 return True
@@ -149,7 +148,7 @@ class Board(object):
             return positions_found
 
         except Exception as e:
-            print(e)
+            print("Exception occurred: ", e)
             traceback.print_stack(file=sys.stdout)
 
     def all_moves(self, player):
@@ -303,7 +302,7 @@ class Board(object):
         try:
             # Check if it's current players turn
             if self.cursor_at != self.get_sym(posit):
-                print("Move not allowed. {0}'s turn now".format(self.cursor_at))
+                # print("Move not allowed. {0}'s turn now".format(self.cursor_at))
                 return False
 
             # Identify the destination
@@ -359,6 +358,6 @@ class Board(object):
 
         except Exception as e:
             # Anything goes wrong
-            print(e)
+            print("Exception occured: ", e)
             return False
             

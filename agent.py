@@ -1,17 +1,5 @@
 from transition import Board
-
-def minimax(game_state, whose_turn, utility_func):
-    # Examine the game states
-    # Makes a decision based on that
-    # returns a decision, i.e., a move with the help of from the minimax tree
-    
-    # Minimax tree analyzes (dummied by human)
-    next_move = input("Enter the next move. Example: 11F\n")
-    x = int(next_move[0])
-    y = int(next_move[1])
-    direction = next_move[2]
-
-    return (x,y),direction
+from minmax import Minimax_Agent
 
 class Agent(object):
     """An agent receives a board state, i.e., a 2-d list as input at moment 
@@ -44,8 +32,9 @@ class Agent(object):
         rtype: a tuple, a string (in that order)
         """
         # Initialize a minimax tree.
-        # Pass the utility function
-        # return the decision
-        decision = minimax(current_state, turn, self.utility)
-        
-        return decision
+        decisionTree = Minimax_Agent(current_state, turn, self.utility)
+        decisions = decisionTree.get_val()
+        dest = decisions[0]        
+        move_direction = decisions[1]
+
+        return dest, move_direction

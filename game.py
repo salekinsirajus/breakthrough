@@ -10,8 +10,8 @@ def setup_game():
 
     agents = { 1: 'Evasive',
             2: 'Conquerer',
-            3: 'Custom1',
-            4: 'Custom2'
+            3: 'House Lannister',
+            4: 'House Stark'
             }
     for i in range(1,5):
         print("{0} : {1}".format(i, agents[i]))
@@ -24,10 +24,10 @@ def setup_game():
         print("You have chosen {0} and {1} to play".format(agents[agent1],
                                                         agents[agent2]))
 
-        utility_functions = {1: u_evasive,
-                            2: u_conquerer,
-                            3: u_custom1,
-                            4: u_custom2
+        utility_functions = {1: evasive,
+                            2: conqueror,
+                            3: house_lannister,
+                            4: house_stark
                             }        
 
         print("\nPlease decide how your board should look like.")
@@ -48,7 +48,7 @@ def setup_game():
         print("######################################################\n")
 
     except (KeyError,ValueError) as e:
-        print(e)
+        print("KeyError or ValueError occured: ", e)
         print("Please try again.")
 
     return list2d, utility_functions[agent1], utility_functions[agent2]
@@ -60,7 +60,7 @@ def run_game(list2d, agent1, agent2):
 
     Smith = 'X'
     John = 'O'
-    starting_turn = John
+    starting_turn = Smith
     agent_smith = Agent(list2d, starting_turn, agent1, Smith)
     agent_john = Agent(list2d, starting_turn, agent2, John)
 

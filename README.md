@@ -7,6 +7,12 @@ Ali Shahram Musavi, Swomma Roy and Sirajus Salekin
 # How To Play
  1. Make sure you have `python 3` installed.
  2. Run `python game.py` and follow the instructions.
+ 3. If you want to play with Evasive and House Lannister, type `1 3` when
+prompted
+    1. Evasive
+    2. Conquerer
+    3. House Lannister
+    4. House Stark
 
 # Unit Testing
 Simply run the `testTransition.py` file:

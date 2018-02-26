@@ -1,10 +1,10 @@
 from transition import *
 from utilities import *
-from Tree import *
+from tree import *
 import copy
 
-
 class Minimax_Agent(object):
+
     def __init__(self, state, turn, utility_func):
         self.utility_func = utility_func
         self.state = state
@@ -13,19 +13,18 @@ class Minimax_Agent(object):
         self.max_val = -999999999999
         
 
-    def get_val(self):
-        
+    def get_val(self):        
         board = Board(self.state, self.turn)
         root = Node(self.state)
 
-        moves_dic = board.all_moves(turn)
+        moves_dic = board.all_moves(self.turn)
 
         source = ()
         direction = "" 
         result = []
     
+        #The set of keys in the dictionary
         for key in moves_dic: 
-            #The set of keys in the dictionary
             
             #The set of values that are "R", "L","F"
             val = moves_dic[key] 
@@ -58,10 +57,7 @@ class Minimax_Agent(object):
         return result
         
 
-
-
     def set_utility(self,node_child):
-
         node_child = node_child
         sec_board = Board(node_child.state, self.turn)
 
@@ -81,18 +77,10 @@ class Minimax_Agent(object):
                 gchild_board = Board(gnew_state)
                 gchild_board.move(key, dis)
         
-                utility = self.utility_func(gnew_state, turn)
+                utility = self.utility_func(gnew_state, self.turn)
                 #Take the minimum of the nodes and assign to the children
                 if utility < self.min_val:
                     self.min_val = utility
 
         node_child.utility = utility
 
-
-
-state = [["X","X", "X"], [".",".", "."], ["O","O", "O"]]
-turn = "X"
-
-board = Minimax_Agent(state, turn, evasive)
-x = board.get_val()
-print(x)
