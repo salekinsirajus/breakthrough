@@ -84,18 +84,25 @@ def run_game(list2d, agent1, agent2):
             print("{0}'s turn now.".format(John))
         else:
             print("Something wrong with the board")
-        
+      
+ 
         move_dest, direction = next_move    
         # Perform the move on the board
         # Try again if it's wrong turn
-        board.move(move_dest, direction)    
+
+        move_success = board.move(move_dest, direction)
+        if move_success == True:
+            # Keep playing
+            board.display_state()
+            pass
+        else:
+            print("Try a valid move.")
 
         # print(board.terminal_state())
-        if board.terminal_state() == True: 
+        if board.terminal_state() != None: 
             print("This game Ended. To play again, run `game.py`")
             break
         # show the new state
-        board.display_state()
 
 if __name__ == '__main__':
     list2d, player1, player2 = setup_game()

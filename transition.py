@@ -265,26 +265,26 @@ class Board(object):
             # print("First case, when one of the players pieces is all out")
             print("Game Over. Player X won")
             self.game_over = True
-            return True
+            return self.playerX
         if player2 is True:
             # print("First case, when one of the players pieces is all out")
             print("Game Over. Player O won")
             self.game_over = True
-            return True
+            return self.playerO
 
         if len(p1list) == 0:
             # print ("Second case, when one of the pieces move to the last row")
             print("Game Over. Player O won")
             self.game_over = True
-            return True
+            return self.playerO
         if len(p2list) == 0:
             # print ("Second case, when one of the pieces move to the last row")
             print("Game Over. Player X won")
             self.game_over = True
-            return True
+            return self.playerX
         
         # None of the winning conditions returned True
-        return False   
+        return None
  
 
     def switch_turn(self):

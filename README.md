@@ -1,6 +1,9 @@
 # Breakthrough
 Breakthrough game, AI agents playing.
 
+# Contributors
+Ali Shahram Musavi, Swomma Roy and Sirajus Salekin
+
 # How To Play
  1. Make sure you have `python 3` installed.
  2. Run `python game.py` and follow the instructions.
