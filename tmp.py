@@ -1,13 +1,13 @@
 from transition import Board
 
-lst = [['X','X','X'],
-        ['.','.','.'],
-        ['O','O', 'O']]
+lst = [['X','.','.'],
+        ['X','.','O'],
+        ['X','.', '.']]
 
 b = Board(lst, 'O')
 #all_moves = {(0,0):['F', 'L'], (0,1):['L', 'F', 'R']}
-generated_moves = b.all_moves('.')
-print(generated_moves)
+print (b.terminal_state())
+
 
 """
 for move in all_moves:

@@ -5,12 +5,6 @@ def minimax(game_state, whose_turn, utility_func):
     # Makes a decision based on that
     # returns a decision, i.e., a move with the help of from the minimax tree
     
-    # printing the current state
-    # for row in game_state:
-    #    for column in row:
-    #        print(column, end='')
-    #    print("\n")
-    
     # Minimax tree analyzes (dummied by human)
     next_move = input("Enter the next move. Example: 11F\n")
     x = int(next_move[0])
@@ -44,7 +38,14 @@ class Agent(object):
             return False
 
     def next_move(self, current_state, turn):
-        # Initialize the minimax tree
+        """Use the minimax tree and the utility function to figure out the next
+        move.
+
+        rtype: a tuple, a string (in that order)
+        """
+        # Initialize a minimax tree.
+        # Pass the utility function
+        # return the decision
         decision = minimax(current_state, turn, self.utility)
         
         return decision

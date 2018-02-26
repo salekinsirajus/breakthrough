@@ -81,14 +81,16 @@ class Board(object):
 
 
     def display_state(self):
-        """Prints out the state passed to this function on the terminal."""
+        """Prints out the state passed to this function on the terminal.""" 
+        print("\n######################################################\n")
         for row in self.board:
             for column in row:
                 print(column, end=' ')
             print("\n")
+        
+        print("######################################################\n")
         return
-
-    
+   
     def get_sym(self, position):
         """Returns the symbol/character at position passed. 
            Returns None if it's neither `O` nor `X`"""
@@ -263,19 +265,30 @@ class Board(object):
         #Print the result for both cases 
 
         if player1 is True:
-            print("Game Over. Player 1 won")
+            # print("First case, when one of the players pieces is all out")
+            print("Game Over. Player X won")
             self.game_over = True
+            return True
         if player2 is True:
-            print("Game Over. Player 2 won")
+            # print("First case, when one of the players pieces is all out")
+            print("Game Over. Player O won")
             self.game_over = True
+            return True
 
         if len(p1list) == 0:
-            print("Game Over. Player 2 won")
+            # print ("Second case, when one of the pieces move to the last row")
+            print("Game Over. Player O won")
             self.game_over = True
+            return True
         if len(p2list) == 0:
-            print("Game Over. Player 1 won")
+            # print ("Second case, when one of the pieces move to the last row")
+            print("Game Over. Player X won")
             self.game_over = True
-    
+            return True
+        
+        # None of the winning conditions returned True
+        return False   
+ 
     def switch_turn(self):
         if self.cursor_at == self.playerO:
             self.cursor_at = self.playerX
@@ -289,24 +302,18 @@ class Board(object):
 
     def move(self, posit, turn):
         """Move to the direction =['R','L','F'] asked to from position passed"""
-        # print("Come inside the function move") 
         try:
             # Check if it's current players turn
             if self.cursor_at != self.get_sym(posit):
                 print("Move not allowed. {0}'s turn now".format(self.cursor_at))
                 return False
 
-            # print("Come inside the try block")
             # Identify the destination
             (x, y) = posit
             # Initialize the destination tuple
             a = 99999999
             b = 99999999
             flow = self.get_direction(posit)
-            # print("The positon passed ({},{})".format(x,y))
-            # print("The dest before assignment = ({},{})".format(a,b))
-            # print("The flow is: ", flow)
-            # print("The turn is: ", turn)
             # Figuring out the dest X (=a) value
             if flow == 'U':
                 a = x - 1                
@@ -343,14 +350,13 @@ class Board(object):
                 return False
             
             # Move the current player to the dest, assign `.` at empty spot
-            #(a, b) = dest
             self.board[a][b] = self.board[x][y]
             self.board[x][y] = '.'
             
             # Flip the turn to the other player
-            print("{0} just played.".format(self.cursor_at))
+            # print("{0} just played.".format(self.cursor_at))
             self.switch_turn()
-            print("Next is {0}'s turn.".format(self.cursor_at))
+            # print("Next is {0}'s turn.".format(self.cursor_at))
             return True
 
         except Exception as e:

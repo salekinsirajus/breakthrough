@@ -74,7 +74,7 @@ def run_game(list2d, agent1, agent2):
         # show the current state
         board.display_state()
         whose_turn = board.get_turn()
-        # pass it to the agent whose turn
+        
         next_move = None
         if whose_turn == Smith:
             print("{0}'s turn now.".format(Smith))
@@ -87,13 +87,12 @@ def run_game(list2d, agent1, agent2):
         
         move_dest, direction = next_move    
         # Perform the move on the board
-        # perform the turn. Try again if it's wrong turn
+        # Try again if it's wrong turn
         board.move(move_dest, direction)    
 
-        # Does not work
-        print(board.terminal_state())
+        # print(board.terminal_state())
         if board.terminal_state() == True: 
-            print("end game")
+            print("This game Ended. To play again, run `game.py`")
             break
         # show the new state
         board.display_state()

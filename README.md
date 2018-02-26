@@ -1,9 +1,14 @@
 # Breakthrough
-Breakthrough game, playing with an AI agent
+Breakthrough game, AI agents playing.
 
 # How To Play
  1. Make sure you have `python 3` installed.
  2. Run `python game.py` and follow the instructions.
+
+# Unit Testing
+Simply run the `testTransition.py` file:
+
+```python testTransition.py```
 
 # Progress
 * Finished implementing `Board` Class methods
@@ -31,12 +36,8 @@ Breakthrough game, playing with an AI agent
     - [ ] `terminal_state()`
 
 # ToDo 
-    - [ ] Finish implementing the `Agent` class
-    - [ ] Decide whether to implement a function or class for `Game`
-    - [ ] Finish `minimax` tree
-    - [ ] Implement `conquerer` and 2 more utility functions
+- [ ] Finish implementing the `Agent` class
+- [ ] Decide whether to implement a function or class for `Game`
+- [ ] Finish `minimax` tree
+- [ ] Implement `conquerer` and 2 more utility functions
 
-# Unit Testing
-Simply run the `testTransition.py` file:
-
-```python testTransition.py```
