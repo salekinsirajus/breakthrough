@@ -48,8 +48,8 @@ Simply run the `testTransition.py` file:
     - [ ] `terminal_state()`
 
 # ToDo 
-- [ ] Finish implementing the `Agent` class
+- [x] Finish implementing the `Agent` class
 - [x] Decide whether to implement a function or class for `Game`
 - [x] Finish `minimax` tree
-- [ ] Implement `conquerer` and 2 more utility functions
+- [x] Implement `conquerer` and 2 more utility functions
 
