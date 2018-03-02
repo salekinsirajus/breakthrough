@@ -12,6 +12,8 @@ class Board(object):
         self.playerX = 'X'
         self.cursor_at = cursor_at
         self.game_over = False        
+        self.total_num_playerO = self.get_piece_count(self.playerO)
+        self.total_num_playerX = self.get_piece_count(self.playerX)
 
     def is_game_over(self):
         return self.game_over
@@ -21,6 +23,25 @@ class Board(object):
 
     def get_current_state(self):
         return self.board
+    
+    def get_remaining_pieces(self, player):
+        diff = -999
+        if player == playerX:
+            diff = self.total_num_playerX - self.get_piece_count(player)
+        
+        else:
+            diff = self.total_num_playerO - self.get_piece_count(player)
+ 
+        return diff
+
+    def get_piece_count(self, player):
+        count = 0
+        for row in self.board:
+            for column in row:
+                if column == player:
+                    count = count + 1
+        
+        return count
 
     def is_valid(self, src, dst):
         """Checking to see if it's possible to move from src to dst.

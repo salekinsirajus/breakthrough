@@ -139,7 +139,7 @@ def enemyscore(player, input_state):
 		return Num_player + total + winningscore("X", input_state)
 
 
-def house_lannister(player, input_state):
+def house_lannister(input_state, player):
 	result = 2 * (myscore(player, input_state) - 1) * enemyscore(player, input_state)
 	percentange = random.uniform(0,1)	#Generates random number between 0-1
 	Num = round(percentange , 2)
@@ -147,7 +147,7 @@ def house_lannister(player, input_state):
 	return result
 
 
-def house_stark(player, input_state):
+def house_stark(input_state, player):
 	result = 1 * (myscore(player, input_state) - 2) * enemyscore(player, input_state)
 	percentange = random.uniform(0,1)	#Generates random number between 0-1
 	Num = round(percentange , 2)

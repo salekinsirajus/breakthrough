@@ -13,6 +13,9 @@ prompted
     2. Conquerer
     3. House Lannister
     4. House Stark
+ 4. After choosing the opponents, you need to choose the board you want
+to play on. For example, if you want to play on a (3x3, 1) board, Enter
+`3 3 1`, respectively. 
 
 # Unit Testing
 Simply run the `testTransition.py` file:
